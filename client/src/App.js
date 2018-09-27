@@ -33,27 +33,21 @@ class App extends Component {
           <BrowserRouter>
             <div>
               <NavBar />
-              <div className="container">
-                <div className="row" >
-                  <div className="col-md-12">
-                    <FlashAlert />
-                    <Switch>
-                      <Route exact path="/" component={Landing} />
-                      <Route path="/register" component={Register} />
-                      <Route path="/login" component={Login} />
-                      <Route path="/profile/:handle" component={Profile} />
-                      <Route path="/profiles" component={ProfileList} />
-                      <Route path="/posts" component={Posts} />
+                <FlashAlert />
+                <Switch>
+                  <Route exact path="/" component={Landing} />
+                  <Route path="/register" component={Register} />
+                  <Route path="/login" component={Login} />
+                  <Route path="/profile/:handle" component={Profile} />
+                  <Route path="/profiles" component={ProfileList} />
+                  <Route path="/posts" component={Posts} />
 
-                      <PrivateRoute exact path="/dashboard" component={Dashboard} />
-                      <PrivateRoute exact path="/edit-profile" component={EditProfile} />
-                      <PrivateRoute exact path="/create-profile" component={EditProfile} />
-                      <PrivateRoute exact path="/add-education" component={AddEducation} />
-                      <PrivateRoute exact path="/add-experience" component={AddExperience} />
-                    </Switch>
-                  </div>
-                </div>
-              </div>              
+                  <PrivateRoute exact path="/dashboard" component={Dashboard} />
+                  <PrivateRoute exact path="/edit-profile" component={EditProfile} />
+                  <PrivateRoute exact path="/create-profile" component={EditProfile} />
+                  <PrivateRoute exact path="/add-education" component={AddEducation} />
+                  <PrivateRoute exact path="/add-experience" component={AddExperience} />
+                </Switch>
             </div>
           </BrowserRouter>
           <Footer />
