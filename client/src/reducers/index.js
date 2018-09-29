@@ -10,7 +10,7 @@ const rootReducer = combineReducers({
     errors: errorReducer,
     profile: profileReducer,
     flash: flashReducer,
-    posts: postsReducer,
+    post: postsReducer,
 })
 
 export default rootReducer;

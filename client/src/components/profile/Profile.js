@@ -1,8 +1,10 @@
 import React, { Component } from 'react';
 import {connect} from 'react-redux';
 import Link from 'react-router-dom/Link';
+import Moment from 'react-moment';
 import API from '../../utils/API';
 import Spinner from '../ui/Spinner';
+import GitRepos from './GitRepos';
 
 class Profile extends Component {
     state = {
@@ -21,14 +23,14 @@ class Profile extends Component {
     }
     render() {
         const {profile} = this.state;
-
         if(!profile){
             return (<Spinner />);
         }
 
+        const {user} = profile;
         const {errors} = this.props;
-        //const avatarUrl = `https://outlook.office.com/owa/service.svc/s/GetPersonaPhoto?email=${user.email}&UA=0&size=HR240x240`;
-        const avatarUrl = `unknown`;
+        const avatarUrl = `https://outlook.office.com/owa/service.svc/s/GetPersonaPhoto?email=${user.email}&UA=0&size=HR240x240`;
+        //const avatarUrl = `unknown`;
         
         return (
             <div className="profile">
@@ -37,7 +39,7 @@ class Profile extends Component {
                     <div className="col-md-12">
                     <div className="row">
                         <div className="col-6">
-                        <a href="profiles.html" className="btn btn-light mb-3 float-left">Back To Profiles</a>
+                            <Link to="/profiles" className="btn btn-light mb-3 float-left">Back To Profiles</Link>
                         </div>
                         <div className="col-6">
             
@@ -53,9 +55,9 @@ class Profile extends Component {
                             </div>
                             </div>
                             <div className="text-center">
-                            <h1 className="display-4 text-center">John Doe</h1>
-                            <p className="lead text-center">Developer at Microsoft</p>
-                            <p>Seattle, WA</p>
+                            <h1 className="display-4 text-center">{user.name}</h1>
+                            <p className="lead text-center">{profile.status} at {profile.company}</p>
+                            <p>{profile.location}</p>
                             <p>
                                 <a className="text-white p-2" href="#">
                                 <i className="fas fa-globe fa-2x"></i>
@@ -81,25 +83,18 @@ class Profile extends Component {
                     <div className="row">
                         <div className="col-md-12">
                         <div className="card card-body bg-light mb-3">
-                            <h3 className="text-center text-info">John's Bio</h3>
-                            <p className="lead">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Provident fuga cum necessitatibus blanditiis vel,
-                            officia facere porro esse numquam assumenda doloremque saepe aliquam nemo excepturi aliquid maiores! Excepturi,
-                            libero repudiandae.
-                            </p>
+                            <h3 className="text-center text-info">{user.name.split(' ')[0]}'s Bio</h3>
+                            <p className="lead"> {profile.bio} </p>
                             <hr />
                             <h3 className="text-center text-info">Skill Set</h3>
                             <div className="row">
                             <div className="d-flex flex-wrap justify-content-center align-items-center">
-                                <div className="p-3">
-                                <i className="fa fa-check"></i> HTML</div>
-                                <div className="p-3">
-                                <i className="fa fa-check"></i> CSS</div>
-                                <div className="p-3">
-                                <i className="fa fa-check"></i> JavaScript</div>
-                                <div className="p-3">
-                                <i className="fa fa-check"></i> Python</div>
-                                <div className="p-3">
-                                <i className="fa fa-check"></i> C#</div>
+                                {
+                                    profile.skills.map((item, index) => (
+                                        <div key={index} className="p-3">
+                                        <i className="fa fa-check"></i> {item}</div>        
+                                    ))
+                                }                               
                             </div>
                             </div>
                         </div>
@@ -110,67 +105,40 @@ class Profile extends Component {
                         <div className="col-md-6">
                         <h3 className="text-center text-info">Experience</h3>
                         <ul className="list-group">
-                            <li className="list-group-item">
-                            <h4>Microsoft</h4>
-                            <p>Oct 2011 - Current</p>
-                            <p>
-                                <strong>Position:</strong> Senior Developer
-                            </p>
-                            <p>
-                                <strong>Description:</strong> Lorem ipsum dolor sit amet consectetur adipisicing elit. Unde doloribus dicta enim
-                                excepturi laborum voluptatem nam provident quisquam facere. Quae?</p>
-                            </li>
-                            <li className="list-group-item">
-                            <h4>Sun Microsystems</h4>
-                            <p>Oct 2004 - Nov 2011</p>
-                            <p><strong>Position: </strong> Systems Admin</p>
-                            <p><strong>Location: </strong> Miami, FL</p>
-                            <p>
-                                <strong>Description: </strong> Lorem ipsum dolor sit amet consectetur adipisicing elit. Unde doloribus dicta
-                                enim excepturi laborum voluptatem nam provident quisquam facere. Quae?</p>
-                            </li>
+                            {
+                                profile.experience.map((item) => (
+                                    <li className="list-group-item" key={item._id}>
+                                        <h4>{item.company}</h4>
+                                        <p> <Moment format="YYYY/MM/DD">{item.from}</Moment> - {item.current || item.to == null ? 'Current': <Moment format="YYYY/MM/DD">{item.to}</Moment> }</p>
+                                        <p> <strong>Position:</strong> {item.title} </p>
+                                        <p>
+                                            <strong>Description:</strong> {item.description}
+                                        </p>
+                                    </li>
+                                ))
+                            }                         
                         </ul>
                         </div>
                         <div className="col-md-6">
                         <h3 className="text-center text-info">Education</h3>
                         <ul className="list-group">
-                            <li className="list-group-item">
-                                <h4>Univeresity Of Washington</h4>
-                                <p>Sep 1993 - June 1999</p>
-                                <p><strong>Degree: </strong>Masters</p>
-                                <p><strong>Field Of Study: </strong>Computer Science</p>                            
-                                <p> <strong>Description:</strong> Lorem ipsum dolor sit amet consectetur adipisicing elit. Unde doloribus dicta
-                                enim excepturi laborum voluptatem nam provident quisquam facere. Quae?</p>
-                            </li>
+                            {
+                                profile.education.map((item) => (
+                                    <li className="list-group-item" key={item._id}>
+                                        <h4>{item.school}</h4>
+                                        <p><Moment format="YYYY/MM/DD">{item.from}</Moment> - {item.current || item.to == null ? '': <Moment format="YYYY/MM/DD">{item.to}</Moment>}</p>
+                                        <p><strong>Degree: </strong>{item.degree}</p>
+                                        <p><strong>Field Of Study: </strong>{item.fieldofstudy}</p>                            
+                                        <p> <strong>Description:</strong> {item.description}</p>
+                                    </li>
+                                ))
+                            }                            
                         </ul>
                         </div>
                     </div>
-            
-                    <div ref="myRef">
-                        <hr />
-                        <h3 className="mb-4">Latest Github Repos</h3>
-                        <div className="card card-body mb-2">
-                        <div className="row">
-                            <div className="col-md-6">
-                            <h4>
-                                <Link to="" className="text-info" target="_blank"> Repository One </Link>
-                            </h4>
-                            <p>Repository description</p>
-                            </div>
-                            <div className="col-md-6">
-                            <span className="badge badge-info mr-1">
-                                Stars: 44
-                            </span>
-                            <span className="badge badge-secondary mr-1">
-                                Watchers: 21
-                            </span>
-                            <span className="badge badge-success">
-                                Forks: 122
-                            </span>
-                            </div>
-                        </div>
-                        </div>
-                    </div>
+                    
+                    {profile.githubusername.length ? <GitRepos username={profile.githubusername} /> : null }                        
+                    
                     </div>
                 </div>
                 </div>

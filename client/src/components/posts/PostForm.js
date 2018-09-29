@@ -10,10 +10,16 @@ class PostForm extends React.Component {
         e.preventDefault();
         console.log(this.state.content);
         
+        const {user} = this.props.auth;
+
         const post = {
             text: this.state.content,
+            name: user.name,
+            avatar: user.avatar
         }
-        this.props.submitPost(post);
+        this.props.submitPost(post).then((res) => {
+          this.setState({content: ''});
+        });
     }
 
     render(){
@@ -39,4 +45,8 @@ class PostForm extends React.Component {
     }
 }
 
-export default connect(null, {submitPost})(PostForm);
+const mapStateToProps = (state) => ({
+   auth: state.auth
+});
+
+export default connect(mapStateToProps, {submitPost})(PostForm);

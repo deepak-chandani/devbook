@@ -21,6 +21,8 @@ router.get('/test', (req, res) => res.json({ msg: 'Posts Works' }));
 // @access  Public
 router.get('/', (req, res) => {
   Post.find()
+    .populate('user', ['_id', 'name', 'avatar', 'email'])
+    .populate('profiles', ['handle'])
     .sort({ date: -1 })
     .then(posts => res.json(posts))
     .catch(err => res.status(404).json({ nopostsfound: 'No posts found' }));
