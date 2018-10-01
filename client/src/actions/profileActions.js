@@ -1,6 +1,7 @@
 import {SET_CURRENT_PROFILE, PROFILE_LOADING, SET_PROFILES} from './types';
 import API from '../utils/API';
 import {setErrors} from '../actions/errorActions';
+import {logoutUser} from '../actions/authActions';
 import {toastr} from 'react-redux-toastr';
 
 
@@ -112,3 +113,14 @@ export const getAllProfiles = () => (dispatch) => {
 
     });
 }
+
+export const deleteProfile = () => (dispatch) => {
+    API.delete('/api/profile')
+    .then((res) => {
+        dispatch(setCurrentProfile(null));
+        dispatch(logoutUser());
+    }).catch((err) => {
+
+    });
+}
+

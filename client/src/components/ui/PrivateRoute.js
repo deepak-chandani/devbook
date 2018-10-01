@@ -11,7 +11,6 @@ const PrivateRoute = ({component: Component, auth, ...rest}) => {
     //console.log("inside private route", auth);
     return (
         <Route {...rest} render={ (props) => {
-                console.log("inside private route", auth);
                 return  auth.isAuthenticated === true ? (
                     <Component {...props} />
                 ) : (

@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import {connect} from 'react-redux';
-import {fetchCurrentProfile, deleteEducation, deleteExperience} from '../../actions/profileActions';
+import {fetchCurrentProfile, deleteEducation, deleteExperience, deleteProfile} from '../../actions/profileActions';
 import {setFlashMessage} from '../../actions/flashActions';
 import {Redirect, Link} from 'react-router-dom';
 import Spinner from '../ui/Spinner';
@@ -43,7 +43,11 @@ class Dashboard extends Component {
     }
 
     onDeleteClick(e) {
-        console.log("onDelete clicked");
+        if(!window.confirm("Are you sure? This action could not be rolled back?")){
+            return;
+        }
+
+        this.props.deleteProfile();        
     }
 
     onDeleteEducation(item) {
@@ -116,4 +120,4 @@ const mapStateToProps = (state) => {
     }
 }
 
-export default connect(mapStateToProps, {fetchCurrentProfile, setFlashMessage, deleteEducation, deleteExperience})(Dashboard);
+export default connect(mapStateToProps, {fetchCurrentProfile, setFlashMessage, deleteEducation, deleteExperience, deleteProfile})(Dashboard);
