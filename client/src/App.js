@@ -23,6 +23,9 @@ import FlashAlert from './components/ui/FlashAlert';
 import AddExperience from './components/profile/AddExperience';
 import ProfileList from './components/profile/ProfileList';
 import Posts from './components/posts/Posts';
+import PostDetail from './components/posts/PostDetail';
+import ReduxToastr from 'react-redux-toastr';
+import 'react-redux-toastr/lib/css/react-redux-toastr.min.css';
 
 UserHelper.setCurrentUserFromLocalStorage(store);
 
@@ -33,7 +36,6 @@ class App extends Component {
           <BrowserRouter>
             <div>
               <NavBar />
-                <FlashAlert />
                 <Switch>
                   <Route exact path="/" component={Landing} />
                   <Route path="/register" component={Register} />
@@ -41,6 +43,7 @@ class App extends Component {
                   <Route path="/profile/:handle" component={Profile} />
                   <Route path="/profiles" component={ProfileList} />
                   <Route path="/posts" component={Posts} />
+                  <Route path="/post/:id" component={PostDetail} />
 
                   <PrivateRoute exact path="/dashboard" component={Dashboard} />
                   <PrivateRoute exact path="/edit-profile" component={EditProfile} />
@@ -51,6 +54,15 @@ class App extends Component {
             </div>
           </BrowserRouter>
           <Footer />
+          <ReduxToastr
+            timeOut={4000}
+            newestOnTop={false}
+            preventDuplicates
+            position="top-right"
+            transitionIn="fadeIn"
+            transitionOut="fadeOut"
+            progressBar
+            closeOnToastrClick/>
         </div>
       </Provider>;
   }

@@ -3,12 +3,12 @@ import {connect} from 'react-redux';
 import PostItem from './PostItem';
 import PostForm from './PostForm';
 import API from '../../utils/API';
-import {fetchPost} from '../../actions/postActions';
+import {fetchPosts} from '../../actions/postActions';
 import Spinner from '../ui/Spinner';
 
 class Posts extends Component {    
     componentDidMount() {
-        this.props.fetchPost();
+        this.props.fetchPosts();
     }
     render() {
         const {posts, loading} = this.props.post;
@@ -27,7 +27,7 @@ class Posts extends Component {
                 <div className="container">                
                     <div className="row">
                         <div className="col-md-12">
-                        <PostForm />
+                        {this.props.auth.isAuthenticated && <PostForm />}                        
                         <div className="posts">
                             {postsContent}         
                         </div>
@@ -41,7 +41,8 @@ class Posts extends Component {
 
 const mapStateToProps = (state) => {
     return {
-        post: state.post
+        auth: state.auth,
+        post: state.post,
     };
 };
-export default connect(mapStateToProps, {fetchPost})(Posts);
+export default connect(mapStateToProps, {fetchPosts})(Posts);

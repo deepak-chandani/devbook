@@ -2,7 +2,7 @@ import API from '../utils/API';
 import { SET_AUTHED_USER, LOGOUT_USER, USER_REGISTERED_SUCCESSFULLY } from './types';
 import { setErrors } from './errorActions';
 import jwt_decode from 'jwt-decode';
-import { setFlashMessage } from './flashActions';
+import {toastr} from 'react-redux-toastr';
 
 
 export const loginUser = (userData) => {
@@ -41,10 +41,7 @@ export const registerUser = (userData, history) => {
             dispatch(setErrors({}));
             console.log(res.data);
             dispatch(userRegisteredSuccessfully(res.data));
-            dispatch(setFlashMessage({
-                type: 'success',
-                message: 'User registered successfully',
-            }))
+            toastr.success('Congrats', 'You are registered successfully! Go ahead, login, create your profile & connect with developers');
             // redirect user to login page
             history.push('/login');
         }).catch((err) => {

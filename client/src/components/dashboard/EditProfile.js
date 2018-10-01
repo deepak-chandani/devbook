@@ -116,7 +116,7 @@ class EditProfile extends Component {
 
         if(profile == null || loading){
             return (<Spinner />);
-        }
+        }      
 
         return (
             <div className="create-profile">

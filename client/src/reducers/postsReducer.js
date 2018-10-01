@@ -1,4 +1,4 @@
-import {ADD_POST, SET_POSTS, POSTS_LOADING, DELETE_POST} from '../actions/types';
+import {ADD_POST, SET_POSTS, POSTS_LOADING, DELETE_POST, SET_POST_DETAIL} from '../actions/types';
 
 const defaultState = {
 	posts: [],
@@ -29,6 +29,22 @@ export default (state = defaultState, action) =>  {
 			return {
 				...state,
 				posts: state.posts.filter((item) => item._id!= action.payload)
+			};
+		case SET_POST_DETAIL: 
+
+			const posts = state.posts.map((item) => {
+				if(item._id != action.payload._id){
+					return item;
+				}else{
+					return action.payload;
+				}
+			});
+
+			return {
+				...state,
+				posts: posts,
+				post: action.payload,
+				loading: false
 			};
 		default:
 			return state;		

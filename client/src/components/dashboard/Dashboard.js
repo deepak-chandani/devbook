@@ -8,11 +8,15 @@ import { setTimeout } from 'timers';
 import Experience from './Experience';
 import Education from './Education';
 import ProfileActions from './ProfileActions';
+import {bindActionCreators} from 'redux';
+import {actions as toastrActions} from 'react-redux-toastr';
+import {toastr} from 'react-redux-toastr';
 
 class Dashboard extends Component {
 
     constructor(props){
         super(props);
+        //this.toastr = bindActionCreators(toastrActions, this.props.dispatch)
 
         this.onDeleteEducation = this.onDeleteEducation.bind(this);
         this.onDeleteExperience = this.onDeleteExperience.bind(this);
@@ -96,11 +100,6 @@ class Dashboard extends Component {
                     <div className="col-md-12">
                     <h1 className="display-4">Dashboard</h1>                    
                     {content}
-                    {/* <div style={{marginBottom: '60px'}}>
-                        <button className="btn btn-danger">
-                        Delete My Account
-                        </button>
-                    </div> */}
                     </div>
                 </div>
                 </div>

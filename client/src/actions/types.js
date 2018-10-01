@@ -11,3 +11,4 @@ export const POSTS_LOADING = 'POSTS_LOADING';
 export const SET_POSTS = 'SET_POSTS';
 export const ADD_POST = 'ADD_POST';
 export const DELETE_POST = 'DELETE_POST';
+export const SET_POST_DETAIL = 'SET_POST_DETAIL';

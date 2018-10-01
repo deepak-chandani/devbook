@@ -1,5 +1,6 @@
 import React from 'react';
 import {Link} from 'react-router-dom';
+import Moment from 'react-moment';
 
 export default (props) => {
     return (
@@ -22,7 +23,7 @@ export default (props) => {
                                 <td>{item.school}</td>
                                 <td>{item.degree}</td>
                                 <td>
-                                    {item.from} - {item.to}
+                                    <Moment format="MMM-YYYY">{item.from}</Moment> - {item.to ? <Moment format="MMM-YYYY">{item.to}</Moment>: null}
                                 </td>
                                 <td>
                                     <button className="btn btn-danger" onClick={() => props.onDelete(item)}>

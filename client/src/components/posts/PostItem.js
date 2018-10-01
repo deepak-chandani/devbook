@@ -1,12 +1,20 @@
 import React from 'react';
 import {Link} from 'react-router-dom';
 import {connect} from 'react-redux';
-import {deletePostAsync} from '../../actions/postActions';
+import {deletePostAsync, likePost, unLikePost} from '../../actions/postActions';
 
 class PostItem extends React.Component {
     onDeletePost(e) {
        const postId = this.props.post._id;
        this.props.deletePostAsync(postId);
+    }
+    onLike(e) {
+      const postId = this.props.post._id;
+      this.props.likePost(postId);
+    }
+    onUnLike(e) {
+      const postId = this.props.post._id;
+      this.props.unLikePost(postId);
     }
 
     render() {
@@ -24,17 +32,17 @@ class PostItem extends React.Component {
                   </div>
                   <div className="col-md-10">
                     <p className="lead"> {post.text} </p>
-                    <button type="button" className="btn btn-light mr-1">
+                    <button type="button" className="btn btn-light mr-1" onClick={this.onLike.bind(this)}>
                       <i className="text-info fas fa-thumbs-up" />
-                      <span className="badge badge-light">4</span>
+                      <span className="badge badge-light">{post.likes.length}</span>
                     </button>
-                    <button type="button" className="btn btn-light mr-1">
+                    <button type="button" className="btn btn-light mr-1" onClick={this.onUnLike.bind(this)}>
                       <i className="text-secondary fas fa-thumbs-down" />
                     </button>
                     <Link to={`/post/${post._id}`} className="btn btn-info mr-1">
                       Comments
                     </Link>
-                    { post.user._id === auth.user.id && (
+                    { auth.isAuthenticated && post.user._id === auth.user.id && (
                       <button type="button" className="btn btn-danger mr-1" onClick={this.onDeletePost.bind(this)}>
                         <i className="fas fa-times" />
                       </button>
@@ -50,4 +58,4 @@ class PostItem extends React.Component {
 const mapStateToProps = (state) => ({
    auth: state.auth
 });
-export default  connect(mapStateToProps, {deletePostAsync})(PostItem);
+export default  connect(mapStateToProps, {deletePostAsync, likePost, unLikePost})(PostItem);

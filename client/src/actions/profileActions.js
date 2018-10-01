@@ -1,7 +1,7 @@
 import {SET_CURRENT_PROFILE, PROFILE_LOADING, SET_PROFILES} from './types';
 import API from '../utils/API';
 import {setErrors} from '../actions/errorActions';
-import { setFlashMessage } from './flashActions';
+import {toastr} from 'react-redux-toastr';
 
 
 export const fetchCurrentProfile = () => (dispatch) => {
@@ -41,14 +41,7 @@ const addEducation = (data) => {
 export const updateProfile = (data, history) => (dispatch) => {
     API.post('/api/profile/', data)
     .then( (res) => {
-        console.log(res.data);
-
-        // set flash message
-        dispatch(setFlashMessage({
-            type: 'success',
-            message: 'Profile successfully updated',
-        }));
-        
+        toastr.success('Great', 'Your profile is successfully updated');
         dispatch(fetchCurrentProfile());
 
         // redirect to /dashboard
@@ -62,15 +55,9 @@ export const updateProfile = (data, history) => (dispatch) => {
 export const updateEducation = (data) => (dispatch) => {
 	API.post('/api/profile/education', data)
 	.then((res) => {
-		 // set flash message
-         dispatch(setFlashMessage({
-            type: 'success',
-            message: 'Education successfully updated',
-        }));
+        toastr.success('Great', 'Education details successfully updated'); 
 
         dispatch(setCurrentProfile(res.data));
-        //dispatch(addEducation(res.data));
-
 
 	}).catch((err) => {
         dispatch(setErrors(err.response.data));

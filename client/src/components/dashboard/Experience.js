@@ -1,4 +1,5 @@
 import React from "react";
+import Moment from 'react-moment';
 
 export default props => {
   return (
@@ -20,7 +21,7 @@ export default props => {
                     <tr key={index}>
                         <td>{item.company}</td>
                         <td>{item.title}</td>
-                        <td>{item.from} - {item.to}</td>
+                        <td><Moment format="MMM-YYYY">{item.from}</Moment> - {item.to ? <Moment format="MMM-YYYY">{item.to}</Moment> : 'Working'}</td>
                         <td><button className="btn btn-danger" onClick={() => props.onDelete(item)}> Delete</button></td>
                     </tr>           
                  )
