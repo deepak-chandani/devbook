@@ -23,7 +23,7 @@ class ProfileItem extends Component{
                 <div className="col-lg-6 col-md-4 col-8">
                     <h3>{user.name}</h3>
                     <p>{profile.status} {profile.company.length > 0 ? <span> at {profile.company} </span> : ''}</p>
-                    <Link to={`/profile/${profile.handle}`} className="btn btn-info"> View Profile </Link>
+                    <Link to={`/profile/${profile.handle}`} className="btn btn-info btn-sm"> View Profile </Link>
                 </div>
                 <div className="col-md-4 d-none d-lg-block">
                     <h4>Skill Set</h4>
