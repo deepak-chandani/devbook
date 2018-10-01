@@ -14,6 +14,7 @@ const authReducer = (state=initialState, action) => {
                 user: action.payload
             };
         case LOGOUT_USER:
+            localStorage.removeItem('jwtToken');
             return {
                 isAuthenticated: false,
                 user: null

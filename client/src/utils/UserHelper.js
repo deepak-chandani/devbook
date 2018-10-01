@@ -13,7 +13,7 @@ class UserHelper {
         // check for expired token
         const currentTime = Date.now() / 1000;
         if(decoded.exp < currentTime){
-            localStorage.setItem('jwtToken', null);
+            localStorage.removeItem('jwtToken');
             // dispatch logout user action
             store.dispatch(logoutUser());
             // Redirect to login
