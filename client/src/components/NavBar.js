@@ -47,10 +47,7 @@ class NavBar extends Component {
 				<ul className="navbar-nav ml-auto">
 					<li className="nav-item">
 						<Link to="/dashboard" className="nav-link"> Dashboard </Link>			            
-					</li>
-					<li className="nav-item">
-						<Link to="/posts" className="nav-link"> Post Feed </Link>			            
-					</li>
+					</li>					
 					<li className="nav-item">
 						<a href="" onClick={this.onLogout} className="nav-link">
 						<img className="rounded-circle" style={{width:'25px', marginRight:'5px'}} src={user && user.avatar}
@@ -74,6 +71,9 @@ class NavBar extends Component {
 			          <li className="nav-item">
 			            <Link className="nav-link" to="/profiles"> Developers </Link>
 			          </li>
+								<li className="nav-item">
+									<Link to="/posts" className="nav-link"> Post Feed </Link>			            
+								</li>
 			        </ul>
 							{!this.props.auth.isAuthenticated && guestLinks}
 							{this.props.auth.isAuthenticated && authedLinks}			        
