@@ -109,7 +109,7 @@ class Profile extends Component {
                                 profile.experience.map((item) => (
                                     <li className="list-group-item" key={item._id}>
                                         <h4>{item.company}</h4>
-                                        <p> <Moment format="YYYY/MM/DD">{item.from}</Moment> - {item.current || item.to == null ? 'Current': <Moment format="YYYY/MM/DD">{item.to}</Moment> }</p>
+                                        <p> <Moment format="MMM-YYYY">{item.from}</Moment> - {item.current || item.to == null ? 'Present': <Moment format="MMM-YYYY">{item.to}</Moment> }</p>
                                         <p> <strong>Position:</strong> {item.title} </p>
                                         <p>
                                             <strong>Description:</strong> {item.description}
@@ -126,7 +126,7 @@ class Profile extends Component {
                                 profile.education.map((item) => (
                                     <li className="list-group-item" key={item._id}>
                                         <h4>{item.school}</h4>
-                                        <p><Moment format="YYYY/MM/DD">{item.from}</Moment> - {item.current || item.to == null ? '': <Moment format="YYYY/MM/DD">{item.to}</Moment>}</p>
+                                        <p><Moment format="MMM-YYYY">{item.from}</Moment> - {item.current || item.to == null ? '': <Moment format="MMM-YYYY">{item.to}</Moment>}</p>
                                         <p><strong>Degree: </strong>{item.degree}</p>
                                         <p><strong>Field Of Study: </strong>{item.fieldofstudy}</p>                            
                                         <p> <strong>Description:</strong> {item.description}</p>

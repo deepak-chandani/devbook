@@ -1,5 +1,6 @@
 import React , {Component} from 'react';
 import {Link} from 'react-router-dom';
+import generateAvatarUrl from '../../utils/generateAvatarUrl';
 
 class ProfileItem extends Component{
 
@@ -11,9 +12,8 @@ class ProfileItem extends Component{
         const {profile} = this.props;
         const {user} = profile;
 
-        const avatarUrl = `https://outlook.office.com/owa/service.svc/s/GetPersonaPhoto?email=${user.email}&UA=0&size=HR240x240`;
-        //const avatarUrl = user.avatar;
-
+        const avatarUrl = generateAvatarUrl(user.email, user.avatar);
+        
         return (
             <div className="card card-body bg-light mb-3">
                 <div className="row">

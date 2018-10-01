@@ -150,13 +150,16 @@ class EditProfile extends Component {
                                         hint="Give us an idea of where you are at in your career"
                                         options={[
                                             {key: 0, value: '* Select Professional Status'},
-                                            {key: 'Developer', value: 'Developer'},
-                                            {key: 'Junior Developer', value: 'Junior Developer'},
-                                            {key: 'Senior Developer', value: 'Senior Developer'},
-                                            {key: 'Manager', value: 'Manager'},
                                             {key: 'Student or Learning', value: 'Student or Learning'},
                                             {key: 'Instructor', value: 'Instructor or Teacher'},
                                             {key: 'Intern', value: 'Intern'},
+                                            {key: 'Junior Developer', value: 'Junior Developer'},
+                                            {key: 'Developer', value: 'Developer'},
+                                            {key: 'Senior Developer', value: 'Senior Developer'},
+                                            {key: 'Project Manager', value: 'Project Manager'},
+                                            {key: 'Consultant', value: 'Consultant'},
+                                            {key: 'Technical Architect', value: 'Technical Architect'},                                            
+                                            {key: 'AVP Engineering', value: 'AVP Engineering'},                                            
                                             {key: 'Other', value: 'Other'},
                                         ]}
                                     />

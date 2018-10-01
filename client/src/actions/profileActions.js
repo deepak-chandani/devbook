@@ -69,6 +69,7 @@ export const addExperience = (data) => (dispatch) => {
     .then((res) => {
         console.log(res.data);
         dispatch(setCurrentProfile(res.data));
+        toastr.success('Great', 'Experience added successfully.'); 
     }).catch((err) => {
         console.log(err.response.data);
         dispatch(setErrors(err.response.data));

@@ -2,6 +2,7 @@ import React from 'react';
 import {Link} from 'react-router-dom';
 import {connect} from 'react-redux';
 import {deletePostAsync, likePost, unLikePost} from '../../actions/postActions';
+import generateAvatarUrl from '../../utils/generateAvatarUrl';
 
 class PostItem extends React.Component {
     onDeletePost(e) {
@@ -20,12 +21,14 @@ class PostItem extends React.Component {
     render() {
       const {post, auth} = this.props;
 
+      const avatarUrl = generateAvatarUrl(post.user.email, post.avatar);
+
       return (
           <div className="card card-body mb-3">
                 <div className="row">
                   <div className="col-md-2">
                     <Link to={`/profile/handle`}>
-                      <img className="rounded-circle d-none d-md-block" src={post.avatar} alt="" />
+                      <img className="rounded-circle d-none d-md-block" src={avatarUrl} alt="" />
                     </Link>
                     <br />
                     <p className="text-center">{post.name}</p>
