@@ -13,8 +13,14 @@ export const fetchCurrentProfile = () => (dispatch) => {
         dispatch(setCurrentProfile(res.data));
     })
     .catch((err) => {
-        dispatch(setCurrentProfile({}));
-        dispatch(setErrors(err.response.data));
+        if(err.response.data == 'Unauthorized'){
+            dispatch(setCurrentProfile(null));
+            dispatch(logoutUser());
+            toastr.info('Token expired', "Please login again");
+        }else{
+            dispatch(setCurrentProfile({}));
+            dispatch(setErrors(err.response.data));
+        }
     });
 }
 

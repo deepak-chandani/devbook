@@ -6,6 +6,7 @@ import classNames from 'classnames';
 import TextFieldGroupInput from '../ui/TextFieldGroupInput';
 import FlashAlert from '../ui/FlashAlert';
 import Redirect from 'react-router/Redirect';
+import { toastr } from 'react-redux-toastr';
 
 class Login extends Component {
     constructor(props){
@@ -21,11 +22,7 @@ class Login extends Component {
 
       if(props.location.state){
          if(props.location.state.redirectMessage){
-            const data = {
-              type: 'info',
-              message: props.location.state.redirectMessage,
-          };
-          this.props.setFlashMessage(data);
+            toastr.error("Private route", props.location.state.redirectMessage);
          }
       }
     }
