@@ -13,11 +13,11 @@ class UserHelper {
         // check for expired token
         const currentTime = Date.now() / 1000;
         if(decoded.exp < currentTime){
+            localStorage.jwtToken = null;
             // dispatch logout user action
             store.dispatch(logoutUser());
-
             // Redirect to login
-           // window.location.href = '/login';
+           window.location.href = '/login';
         }
     }
 }
