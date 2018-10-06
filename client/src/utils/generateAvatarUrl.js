@@ -1,5 +1,6 @@
 
 const generateAvatarUrl = (email, defaultUrl) => {
+    return defaultUrl;
     if(!email){
         return defaultUrl;
     }
