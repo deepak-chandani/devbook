@@ -30,7 +30,7 @@ class Profile extends Component {
 
         const {user} = profile;
         const {errors} = this.props;
-        const avatarUrl = generateAvatarUrl(user.email);
+        const avatarUrl = user.avatar;
         //const avatarUrl = `https://outlook.office.com/owa/service.svc/s/GetPersonaPhoto?email=${user.email}&UA=0&size=HR240x240`;
         //const avatarUrl = `unknown`;
         
