@@ -5,6 +5,7 @@ import Moment from 'react-moment';
 import API from '../../utils/API';
 import Spinner from '../ui/Spinner';
 import GitRepos from './GitRepos';
+import generateAvatarUrl from '../../utils/generateAvatarUrl';
 
 class Profile extends Component {
     state = {
@@ -29,7 +30,8 @@ class Profile extends Component {
 
         const {user} = profile;
         const {errors} = this.props;
-        const avatarUrl = `https://outlook.office.com/owa/service.svc/s/GetPersonaPhoto?email=${user.email}&UA=0&size=HR240x240`;
+        const avatarUrl = generateAvatarUrl(user.email);
+        //const avatarUrl = `https://outlook.office.com/owa/service.svc/s/GetPersonaPhoto?email=${user.email}&UA=0&size=HR240x240`;
         //const avatarUrl = `unknown`;
         
         return (
